@@ -1,48 +1,49 @@
 import React, {Component} from 'react';
-import {  DatePickerIOS,
+import {  NavigatorIOS,
           StyleSheet,
           Text,
           TextInput,
-          View, } from 'react-native';
+          TouchableHighlight,
+          View, } from 'react-native'
+import Task from './Task'
+import Home from './Home'
+
 
 export default class App extends Component {
-  constructor(props){
-    super(props)
-    let d = new Date()
-    this.state = {
-      date: d
-    }
+  constructor(){
+    super()
   }
-  dateChange = (e) => {
-    console.log(e)
-    this.setState({date:e})
+
+  handleNavigationRequest = () => {
+    console.log('clicked')
+    this.refs.nav.push({
+      component: Task,
+      title: 'Bar That',
+      passProps: { myProp: 'bar' }
+    })
   }
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is A TEST!</Text>
-        <DatePickerIOS  date={this.state.date}
-                        style={styles.button}
-                        mode="date"
-                        onDateChange= {this.dateChange}/>
+        <NavigatorIOS
+          ref='nav'
+          initialRoute={{
+            component:Home,
+            title: 'SleepOver',
+            passProps: { myProp: 'foo' },
+            rightButtonTitle: 'Add',
+            onRightButtonPress: () => {this.handleNavigationRequest()},
+          }}
+          style={{flex: 1}}
+        />
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
-    marginTop: '20%',
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: 'black',
     flex: 1,
-    marginTop: '30%',
-    justifyContent: 'center',
-    //width: '500px'
+    backgroundColor: '#fff',
   }
 });
