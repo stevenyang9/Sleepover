@@ -6,37 +6,12 @@ import {  NavigatorIOS,
           TouchableHighlight,
           View, } from 'react-native'
 import Task from './Task'
+import Home from './Home'
 
-
-class Home extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  _onForward() {
-    this.props.navigator.push({
-        component: Task,
-        title: 'Create Task',
-        passProps: { myProp: 'bar' }
-    });
-  }
-
-  render() {
-    return (
-      <View style={{marginTop: '30%'}} onPress ={ () => console.log('pressed')}>
-        <TouchableHighlight onPress={this._onForward}>
-          <Text>Tap me to load the next scene</Text>
-        </TouchableHighlight>
-        <Text>HI</Text>
-      </View>
-    )
-  }
-}
 
 export default class App extends Component {
-  constructor(props){
-    super(props)
-
+  constructor(){
+    super()
   }
 
   _handleNavigationRequest() {
@@ -52,15 +27,15 @@ export default class App extends Component {
       <View style={styles.container}>
         <NavigatorIOS
           initialRoute={{
-            component: Home,
-            title: 'SleepOver',
+            component:Home,
+            title: 'Sleepover',
             passProps: { myProp: 'foo' },
             rightButtonTitle: '+',
             onRightButtonPress: () => this._handleNavigationRequest(),
           }}
           style={{flex: 1}}
         />
-        <Task/>
+        <Home />
       </View>
     )
   }

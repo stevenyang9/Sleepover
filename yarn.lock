@@ -3219,6 +3219,10 @@ react-native-tab-navigator@^0.3.3:
     immutable "^3.8.1"
     prop-types "^15.5.10"
 
+react-native-timeline-listview@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-timeline-listview/-/react-native-timeline-listview-0.2.2.tgz#96b65797425525cf98d17e45044b7c154ea82421"
+
 react-native-vector-icons@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.1.1.tgz#9ac75bde77d9243346668c51dca7756775428087"
