@@ -3,36 +3,64 @@ import {  NavigatorIOS,
           StyleSheet,
           Text,
           TextInput,
-          Image,
+          TouchableHighlight,
           View, } from 'react-native'
 import Task from './Task'
+
+
+class Home extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  _onForward() {
+    this.props.navigator.push({
+        component: Task,
+        title: 'Create Task',
+        passProps: { myProp: 'bar' }
+    });
+  }
+
+  render() {
+    return (
+      <View style={{marginTop: '30%'}} onPress ={ () => console.log('pressed')}>
+        <TouchableHighlight onPress={this._onForward}>
+          <Text>Tap me to load the next scene</Text>
+        </TouchableHighlight>
+        <Text>HI</Text>
+      </View>
+    )
+  }
+}
 
 export default class App extends Component {
   constructor(props){
     super(props)
 
   }
+
   _handleNavigationRequest() {
     console.log('clicked')
-    this.refs.nav.push({
-      component: App,
-      title: 'Genius',
-      passProps: { myProp: 'genius' },
-    });
+    this.props.navigator.push({
+      component: Task,
+      title: 'Bar That',
+      passProps: { myProp: 'bar' }
+    })
   }
   render() {
     return (
       <View style={styles.container}>
         <NavigatorIOS
           initialRoute={{
-            component:Task,
-            title: 'Sleepover',
+            component: Home,
+            title: 'SleepOver',
             passProps: { myProp: 'foo' },
             rightButtonTitle: '+',
             onRightButtonPress: () => this._handleNavigationRequest(),
           }}
+          style={{flex: 1}}
         />
-        <Task />
+        <Home/>
       </View>
     )
   }
