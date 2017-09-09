@@ -6,6 +6,7 @@ import {  DatePickerIOS,
           Image,
           View, } from 'react-native'
 import { CheckBox, Button } from 'react-native-elements'
+import { ref } from './config.js'
 
 export default class Task extends Component {
   constructor(props){
@@ -18,6 +19,7 @@ export default class Task extends Component {
       checked: true,
       repeat: [false, false, false, false, false, false, false]
     }
+
   }
   dateChange = (e) => {
     console.log(e)
@@ -32,6 +34,19 @@ export default class Task extends Component {
     newState[i] ? newState[i]=false : newState[i]=true
     console.log(newState)
     this.setState({repeat: newState})
+  }
+
+  readData = () => {
+//     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+//   // ...
+// });
+  }
+
+  createTask = () => {
+    console.log('createTask')
+    const taskId = ref.child('tasks').push().key
+    ref.child(`tasks/${taskId}`).set({...this.state, taskId})
   }
   render() {
     return (
@@ -67,6 +82,7 @@ export default class Task extends Component {
           large
           buttonStyle={{backgroundColor: 'blue'}}
           icon={{name: 'calendar-plus-o', type: 'font-awesome'}}
+          onPress={this.createTask}
           title='CREATE' />
       </View>
     );
