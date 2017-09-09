@@ -76,8 +76,8 @@ export default class Task extends Component {
 const styles = StyleSheet.create({
   container: {
     //flex: 1,
-    //marginTop: '10%',
-    margin: '5% 0%',
+    marginTop: '20%',
+    margin: '5%',
     backgroundColor: '#fff',
     // alignItems: 'center',
     // justifyContent: 'center',

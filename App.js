@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {  DatePickerIOS,
+import {  NavigatorIOS,
           StyleSheet,
           Text,
           TextInput,
@@ -12,9 +12,25 @@ export default class App extends Component {
     super(props)
 
   }
+  _handleNavigationRequest() {
+    this.refs.nav.push({
+      component: App,
+      title: 'Genius',
+      passProps: { myProp: 'genius' },
+    });
+  }
   render() {
     return (
       <View style={styles.container}>
+        <NavigatorIOS
+          initialRoute={{
+            component:Task,
+            title: 'Sleepover',
+            passProps: { myProp: 'foo' },
+            rightButtonTitle: '+',
+            onRightButtonPress: () => this._handleNavigationRequest(),
+          }}
+        />
         <Task />
       </View>
     )
@@ -23,7 +39,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '20%',
+    //marginTop: '20%',
     backgroundColor: '#fff',
   },
   datepicker: {
