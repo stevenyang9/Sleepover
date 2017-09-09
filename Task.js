@@ -5,7 +5,7 @@ import {  DatePickerIOS,
           TextInput,
           Image,
           View, } from 'react-native'
-import { CheckBox } from 'react-native-elements'
+import { CheckBox, Button } from 'react-native-elements'
 
 export default class Task extends Component {
   constructor(props){
@@ -37,7 +37,7 @@ export default class Task extends Component {
     return (
       <View style={styles.container}>
         <TextInput
-            style={{height: 40, textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
+            style={{height: 40, margin: "5% 0%", textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
             placeholder={'Please enter Task Title'}
             placeholderTextColor={'gray'}
             onChangeText={(text) => this.setState({title: text})}
@@ -57,12 +57,17 @@ export default class Task extends Component {
         }) }
         </View>
         <TextInput
-            style={{marginTop: "30%", height: 40, textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
+            style={{margin: "5% 10%", height: 40, textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
             placeholder={'Please enter Contact'}
             placeholderTextColor={'gray'}
             onChangeText={(text) => this.setState({contact: text})}
             value={this.state.contact}
           />
+        <Button
+          large
+          buttonStyle={{backgroundColor: 'blue'}}
+          icon={{name: 'calendar-plus-o', type: 'font-awesome'}}
+          title='CREATE' />
       </View>
     );
   }
@@ -71,7 +76,8 @@ export default class Task extends Component {
 const styles = StyleSheet.create({
   container: {
     //flex: 1,
-    marginTop: '20%',
+    //marginTop: '10%',
+    margin: '5% 0%',
     backgroundColor: '#fff',
     // alignItems: 'center',
     // justifyContent: 'center',

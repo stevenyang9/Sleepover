@@ -5,8 +5,7 @@ import {  DatePickerIOS,
           TextInput,
           Image,
           View, } from 'react-native'
-import { CheckBox } from 'react-native-elements'
-//import Task from './Task'
+import Task from './Task'
 
 export default class App extends Component {
   constructor(props){
@@ -16,7 +15,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>HI</Text>
+        <Task />
       </View>
     )
   }
@@ -24,18 +23,14 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     marginTop: '20%',
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   datepicker: {
     backgroundColor: 'black',
     flex: 1,
     marginTop: '30%',
     justifyContent: 'center',
-    //width: '500px'
   },
   circle: {
     width: 40,
