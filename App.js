@@ -22,7 +22,9 @@ export default class App extends Component {
       passProps: { myProp: 'bar' }
     })
   }
+
   render() {
+    //'rgb(45,156,219)'
     return (
       <View style={styles.container}>
         <NavigatorIOS
