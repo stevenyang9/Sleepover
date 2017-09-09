@@ -6,17 +6,17 @@ import {  NavigatorIOS,
           Image,
           View, } from 'react-native'
 import Task from './Task'
-import Timeline from 'react-native-timeline-listview'
+import Home from './Home'
+
 
 export default class App extends Component {
-  constructor(props){
-    super(props)
-
+  constructor(){
+    super()
   }
   _handleNavigationRequest() {
     console.log('clicked')
     this.refs.nav.push({
-      component: App,
+      component: ask,
       title: 'Genius',
       passProps: { myProp: 'genius' },
     });
@@ -26,14 +26,13 @@ export default class App extends Component {
       <View style={styles.container}>
         <NavigatorIOS
           initialRoute={{
-            component:Task,
+            component:Home,
             title: 'Sleepover',
             passProps: { myProp: 'foo' },
             rightButtonTitle: '+',
             onRightButtonPress: () => this._handleNavigationRequest(),
           }}
         />
-        <Task />
       </View>
     )
   }

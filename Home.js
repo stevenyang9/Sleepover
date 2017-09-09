@@ -5,10 +5,12 @@ import {
     View
   } from 'react-native';
 import Timeline from 'react-native-timeline-listview'
+import Task from './Task'
 
-export default class Example extends Component {
+export default class Home extends Component {
   constructor(){
     super()
+    this.showHome = this.showHow.bind(this)
     this.data = [
       {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
       {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
