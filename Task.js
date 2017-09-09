@@ -22,9 +22,8 @@ export default class Task extends Component {
 
   }
   dateChange = (e) => {
-    console.log(e)
     this.setState({
-      date:e
+      date: e
     })
   }
 
@@ -36,17 +35,11 @@ export default class Task extends Component {
     this.setState({repeat: newState})
   }
 
-  readData = () => {
-//     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// });
-  }
-
   createTask = () => {
     console.log('createTask')
     const taskId = ref.child('tasks').push().key
-    ref.child(`tasks/${taskId}`).set({...this.state, taskId})
+    let date = new Date(this.state.date).toString()
+    ref.child(`tasks/${taskId}`).set({...this.state, date, taskId})
   }
   render() {
     return (

@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
     StyleSheet,
     Text,
     View,
     TouchableHighlight,
-  } from 'react-native';
+  } from 'react-native'
+import { ref } from './config.js'
 import Timeline from 'react-native-timeline-listview'
 
 export default class Home extends Component {
@@ -19,6 +20,21 @@ export default class Home extends Component {
     ]
   }
 
+  readData = () => {
+    return ref.child('tasks').on('value', (snapshot) => {
+      console.log('fetching tasks')
+      const tasks = snapshot.val() || {}
+      console.log(tasks)
+      return tasks
+    }, (error) => {
+      console.log("The read failed: " + error.code);
+      return error.code
+    })
+  }
+
+  componentWillMount(){
+    let data = this.readData()
+  }
 
   render() {
     //'rgb(45,156,219)'
