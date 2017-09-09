@@ -52,7 +52,7 @@ export default class Task extends Component {
 
         { ['S','M','T','W','T','F','S'].map((day, i) => {
           return (  <Image key={i} style={this.state.repeat[i] ? styles.circleChecked : styles.circle} >
-                      <Text onPress={(e) => {this.handleClick(i, e)}}>{day}</Text>
+                      <Text style={{color: 'white'}} onPress={(e) => {this.handleClick(i, e)}}>{day}</Text>
                     </Image>)
         }) }
         </View>
