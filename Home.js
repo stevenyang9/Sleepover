@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight,
   } from 'react-native';
 import Timeline from 'react-native-timeline-listview'
 
 export default class Home extends Component {
-  constructor(){
-    super()
+  constructor(props, context){
+    super(props, context)
     this.data = [
       {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
       {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
@@ -18,9 +19,6 @@ export default class Home extends Component {
     ]
   }
 
-  componentDidMount(){
-    console.log(this.data)
-  }
 
   render() {
     //'rgb(45,156,219)'

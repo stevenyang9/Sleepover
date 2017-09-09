@@ -14,9 +14,9 @@ export default class App extends Component {
     super()
   }
 
-  _handleNavigationRequest() {
+  handleNavigationRequest = () => {
     console.log('clicked')
-    this.props.navigator.push({
+    this.refs.nav.push({
       component: Task,
       title: 'Bar That',
       passProps: { myProp: 'bar' }
@@ -26,17 +26,16 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <NavigatorIOS
+          ref='nav'
           initialRoute={{
             component:Home,
-            title: 'Sleepover',
+            title: 'SleepOver',
             passProps: { myProp: 'foo' },
-            rightButtonTitle: '+',
-            onRightButtonPress: () => this._handleNavigationRequest(),
+            rightButtonTitle: 'Add',
+            onRightButtonPress: () => {this.handleNavigationRequest()},
           }}
           style={{flex: 1}}
         />
-        <Home />
-        {/* <Task /> */}
       </View>
     )
   }
@@ -44,7 +43,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //marginTop: '20%',
+    flex: 1,
     backgroundColor: '#fff',
   }
 });
