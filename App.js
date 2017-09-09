@@ -23,8 +23,9 @@ export default class App extends Component {
         <Text>This is A TEST!</Text>
         <DatePickerIOS  date={this.state.date}
                         style={styles.button}
-                        mode="date"
+                        mode="datetime"
                         onDateChange= {this.dateChange}/>
+    
       </View>
     );
   }
