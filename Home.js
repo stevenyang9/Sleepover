@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight
   } from 'react-native';
 import Timeline from 'react-native-timeline-listview'
 import Task from './Task'
@@ -10,7 +11,6 @@ import Task from './Task'
 export default class Home extends Component {
   constructor(){
     super()
-    this.showHome = this.showHow.bind(this)
     this.data = [
       {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
       {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
@@ -20,14 +20,26 @@ export default class Home extends Component {
     ]
   }
 
+  setNativeProps = (nativeProps) => {
+    this._root.setNativeProps(nativeProps);
+  }
+
+  onPress() {
+    console.log('asdf')
+    this.props.navigator.push({
+      component:Task,
+      title: 'Genius',
+      passProps: { myProp: 'genius' },
+    });
+  }
+
   render() {
     //'rgb(45,156,219)'
     return (
       <View style={styles.container}>
-        <Timeline
-          style={styles.list}
-          data={this.data}
-        />
+        <TouchableHighlight onPress={this.onPress}>
+          <Text> HI </Text>
+        </TouchableHighlight>
       </View>
     );
   }

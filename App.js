@@ -4,7 +4,8 @@ import {  NavigatorIOS,
           Text,
           TextInput,
           Image,
-          View, } from 'react-native'
+          View,
+          TouchableOpacity } from 'react-native'
 import Task from './Task'
 import Home from './Home'
 
@@ -13,26 +14,28 @@ export default class App extends Component {
   constructor(){
     super()
   }
+
   _handleNavigationRequest() {
-    console.log('clicked')
-    this.refs.nav.push({
-      component: ask,
+    console.log('ADSFJASLKDFJASLDFJASLDJFKSLJFKLSJD')
+    this.props.navigator.push({
+      component:Home,
       title: 'Genius',
-      passProps: { myProp: 'genius' },
+      // passProps: { myProp: 'genius' },
     });
   }
+
+  static renderRightButton = (props) => {
+      return (
+          <TouchableOpacity onPress={() => console.log('onRightPressed')}>
+              <Text>Right Button</Text>
+          </TouchableOpacity>
+      );
+    }
+
   render() {
     return (
       <View style={styles.container}>
-        <NavigatorIOS
-          initialRoute={{
-            component:Home,
-            title: 'Sleepover',
-            passProps: { myProp: 'foo' },
-            rightButtonTitle: '+',
-            onRightButtonPress: () => this._handleNavigationRequest(),
-          }}
-        />
+        <Task/>
       </View>
     )
   }
