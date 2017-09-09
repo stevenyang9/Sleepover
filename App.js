@@ -32,7 +32,7 @@ export default class App extends Component {
     console.log(i)
     newState[i] ? newState[i]=false : newState[i]=true
     console.log(newState)
-    //this.setState({repeat: newState})
+    this.setState({repeat: newState})
   }
   render() {
     return (
@@ -48,7 +48,6 @@ export default class App extends Component {
                         style={styles.datepicker}
                         mode="datetime"
                         onDateChange= {this.dateChange}/>
-        {/* <Text>Repeat</Text> */}
         <CheckBox title='Repeat' checked={this.state.checked} style={{marginTop: '30%', padding: '5%'}}/>
         <View style={styles.repeat}>
 
