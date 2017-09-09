@@ -6,6 +6,7 @@ import {  NavigatorIOS,
           Image,
           View, } from 'react-native'
 import Task from './Task'
+import Timeline from 'react-native-timeline-listview'
 
 export default class App extends Component {
   constructor(props){
