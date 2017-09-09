@@ -22,9 +22,8 @@ export default class Task extends Component {
 
   }
   dateChange = (e) => {
-    console.log(e)
     this.setState({
-      date:e
+      date: e
     })
   }
 
@@ -39,7 +38,8 @@ export default class Task extends Component {
   createTask = () => {
     console.log('createTask')
     const taskId = ref.child('tasks').push().key
-    ref.child(`tasks/${taskId}`).set({...this.state, taskId})
+    let date = new Date(this.state.date).toString()
+    ref.child(`tasks/${taskId}`).set({...this.state, date, taskId})
   }
   render() {
     return (
