@@ -13,6 +13,7 @@ export default class App extends Component {
 
   }
   _handleNavigationRequest() {
+    console.log('clicked')
     this.refs.nav.push({
       component: App,
       title: 'Genius',
