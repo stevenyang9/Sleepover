@@ -36,13 +36,6 @@ export default class Task extends Component {
     this.setState({repeat: newState})
   }
 
-  readData = () => {
-//     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// });
-  }
-
   createTask = () => {
     console.log('createTask')
     const taskId = ref.child('tasks').push().key

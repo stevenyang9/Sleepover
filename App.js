@@ -18,7 +18,7 @@ export default class App extends Component {
     console.log('clicked')
     this.refs.nav.push({
       component: Task,
-      title: 'Bar That',
+      title: 'Create Task',
       passProps: { myProp: 'bar' }
     })
   }
@@ -29,7 +29,7 @@ export default class App extends Component {
           ref='nav'
           initialRoute={{
             component:Home,
-            title: 'SleepOver',
+            title: 'Home',
             passProps: { myProp: 'foo' },
             rightButtonTitle: 'Add',
             onRightButtonPress: () => {this.handleNavigationRequest()},
