@@ -1,30 +1,31 @@
-import React, {Component} from 'react';
-import {  DatePickerIOS,
-          StyleSheet,
-          Text,
-          TextInput,
-          View, } from 'react-native';
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import Timeline from 'react-native-timeline-listview'
 
-export default class App extends Component {
-  constructor(props){
-    super(props)
-    let d = new Date()
-    this.state = {
-      date: d
-    }
+export default class Example extends Component {
+  constructor(){
+    super()
+    this.data = [
+      {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
+      {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
+      {time: '12:00', title: 'Event 3', description: 'Event 3 Description'},
+      {time: '14:00', title: 'Event 4', description: 'Event 4 Description'},
+      {time: '16:30', title: 'Event 5', description: 'Event 5 Description'}
+    ]
   }
-  dateChange = (e) => {
-    console.log(e)
-    this.setState({date:e})
-  }
+
   render() {
+    //'rgb(45,156,219)'
     return (
       <View style={styles.container}>
-        <Text>This is A TEST!</Text>
-        <DatePickerIOS  date={this.state.date}
-                        style={styles.button}
-                        mode="date"
-                        onDateChange= {this.dateChange}/>
+        <Timeline
+          style={styles.list}
+          data={this.data}
+        />
       </View>
     );
   }
@@ -32,17 +33,13 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
-    marginTop: '20%',
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: 'black',
     flex: 1,
-    marginTop: '30%',
-    justifyContent: 'center',
-    //width: '500px'
-  }
+    padding: 10,
+		paddingTop:65,
+		backgroundColor:'white'
+  },
+  list: {
+    flex: 1,
+    marginTop:20,
+  },
 });
