@@ -17,7 +17,8 @@ export default class Contact extends Component {
     super(props)
     this.state = {
       text: '',
-      contacts: []
+      contacts: [],
+      friends: []
     }
   }
 
@@ -55,6 +56,16 @@ export default class Contact extends Component {
     this.setState({text: text})
   }
 
+  handleAddContact = (name, phone) => {
+    //console.log('clicked', name, phone)
+    let contactData = {
+      name: name,
+      phone: phone
+    }
+    this.setState({friends: [...this.state.friends, contactData]})
+    console.log(this.state.friends)
+  }
+
   componentDidMount() {
     this.getContacts()
   }
@@ -71,10 +82,8 @@ export default class Contact extends Component {
             onChangeText={this.filterContacts}
             value={this.state.text}
           /> */}
-          <Card containerStyle={{flex: 1}}
-                title="Add To Sleep Over">
+          <Card containerStyle={{flex: 1}} title="Add To Sleep Over">
             <ScrollView>
-
               { this.state.contacts ?
                   this.state.contacts.map((u, i) => {
                     console.log(u.name)
@@ -83,12 +92,12 @@ export default class Contact extends Component {
                         key={i}
                         roundAvatar
                         title={u.name}
-                        avatar={{uri:'/assets/avatars/boy.png'}}
+                        avatar={{uri:'./assets/avatars/boy.png'}}
+                        onPress={() => this.handleAddContact(u.name, u.phoneNumbers[0].digits)}
                       />
                     );
                   })
                : null}
-
             </ScrollView>
           </Card>
       </View>
