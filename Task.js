@@ -101,8 +101,8 @@ export default class Task extends Component {
         </View>
           <Picker
             style={{marginTop: 0}}
-            selectedValue={this.state.contact.name}
-            onValueChange={(e) => this.handlePicker(e) }>
+            selectedValue={1}
+            onValueChange={(itemValue, itemIndex) => this.setState({contact: itemValue}) }>
             {this.data ? this.data.map((friend,i) => {
                 return (
                   <Picker.Item key={i} label={friend.name} value={friend} />
