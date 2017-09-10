@@ -4,6 +4,7 @@ import {  DatePickerIOS,
           Text,
           TextInput,
           Image,
+          TouchableHighlight,
           View, } from 'react-native'
 import { CheckBox, Button } from 'react-native-elements'
 import { ref } from './config.js'
@@ -60,9 +61,12 @@ export default class Task extends Component {
         <View style={styles.repeat}>
 
         { ['S','M','T','W','T','F','S'].map((day, i) => {
-          return (  <Image key={i} style={this.state.repeat[i] ? styles.circleChecked : styles.circle} onPress={(e) => {this.handleClick(i, e)}} >
-                      <Text style={this.state.repeat[i] ? styles.textChecked : styles.textNotCheck} >{day}</Text>
-                    </Image>)
+          return (
+            <TouchableHighlight key={i} onPress={(e) => {this.handleClick(i, e)}}
+              style={this.state.repeat[i] ? styles.circleChecked : styles.circle}>
+                <Text style={this.state.repeat[i] ? styles.textChecked : styles.textNotCheck} >{day}</Text>
+            </TouchableHighlight>
+            )
         }) }
         </View>
         <TextInput

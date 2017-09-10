@@ -86,7 +86,7 @@ export default class Contact extends Component {
                         roundAvatar
                         title={u.name}
                         avatar={{uri:'/assets/avatars/boy.png'}}
-                        onPressRightIcon={(contact) => this.handleAddContact(contact)}
+                        onPress={(contact) => this.handleAddContact(contact)}
                       />
                     );
                   })
