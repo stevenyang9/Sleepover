@@ -8,6 +8,8 @@ import {  NavigatorIOS,
 import Task from './Task'
 import Home from './Home'
 import Contact from './Contact'
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 export default class App extends Component {
   constructor(){
@@ -24,6 +26,10 @@ export default class App extends Component {
       passProps: { myProp: 'bar' }
     })
   }
+
+  // componentWillMount() {
+  //   Icon.getImageSource('plusIcon', 30, '#F5002A').then((source) => { plusIcon = source});
+  // }
 
   render() {
     //'rgb(45,156,219)'
