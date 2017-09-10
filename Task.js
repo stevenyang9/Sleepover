@@ -4,6 +4,7 @@ import {  DatePickerIOS,
           Text,
           TextInput,
           Image,
+          Picker,
           TouchableHighlight,
           View, } from 'react-native'
 import { CheckBox, Button } from 'react-native-elements'
@@ -17,11 +18,11 @@ export default class Task extends Component {
     this.state = {
       date: d,
       title: '',
-      contact: '',
+      contact: {},
       checked: true,
       repeat: [false, false, false, false, false, false, false]
     }
-
+    this.friends = []
   }
   dateChange = (e) => {
     this.setState({
@@ -37,12 +38,41 @@ export default class Task extends Component {
     this.setState({repeat: newState})
   }
 
+  getFriends = () => {
+    let friendPromise = new Promise((resolve, reject) => {
+      ref.child('friends').once('value', (snapshot) => {
+        console.log('fetching friends')
+        const tasks = snapshot.val() || {}
+        arr = Object.values(tasks)
+        if (arr.length === Object.keys(tasks).length) {
+          resolve(arr)
+        }
+      })
+    })
+    friendPromise.then((friendArr) => {
+      if (friendArr.length > 0) {
+        console.log('friends found', friendArr)
+        this.data = friendArr
+        this.setState({contact: friendArr[0]})
+      }
+    })
+  }
+
   createTask = () => {
     console.log('createTask')
     const taskId = ref.child('tasks').push().key
     let date = new Date(this.state.date).toString()
     ref.child(`tasks/${taskId}`).set({...this.state, date, taskId})
   }
+
+  handlePicker = (data) => {
+    this.setState({contact: data})
+  }
+
+  componentWillMount() {
+    this.getFriends()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -69,13 +99,19 @@ export default class Task extends Component {
             )
         }) }
         </View>
-        <TextInput
-            style={{margin: "5% 10%", height: 40, textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
-            placeholder={'Please enter Contact'}
-            placeholderTextColor={'gray'}
-            onChangeText={(text) => this.setState({contact: text})}
-            value={this.state.contact}
-          />
+          <Picker
+            style={{marginTop: 0}}
+            selectedValue={this.state.contact.name}
+            onValueChange={(e) => this.handlePicker(e) }>
+            {this.data ? this.data.map((friend,i) => {
+                return (
+                  <Picker.Item key={i} label={friend.name} value={friend} />
+                )
+              }) : null }
+          </Picker>
+
+
+
           <View style={{alignItems: 'center'}}>
             <LinearGradient colors={['#0cc5c7', '#0097d1', '#0058d1']} style={{ width: 250, padding: 10, alignItems: 'center', borderRadius: 40 }}>
                 <Button buttonStyle={{backgroundColor:'transparent'}}
@@ -100,7 +136,7 @@ const styles = StyleSheet.create({
   datepicker: {
     backgroundColor: 'black',
     flex: 1,
-    marginTop: '30%',
+    marginTop: '20%',
     justifyContent: 'center',
   },
   circle: {
