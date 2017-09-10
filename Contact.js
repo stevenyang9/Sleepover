@@ -17,8 +17,7 @@ export default class Contact extends Component {
     super(props)
     this.state = {
       text: '',
-      contacts: [],
-      friends: []
+      contacts: []
     }
   }
 
@@ -51,45 +50,17 @@ export default class Contact extends Component {
     showFirstContactAsync().then(res => res ? this.setState({contacts: res}) : null)
   }
 
-  createContacts = (data) => {
-    console.log('create contacts')
-    let friendPromise = new Promise((resolve, reject) => {
-      ref.child('friends').once('value', (snapshot) => {
-        console.log('fetching friends')
-        const tasks = snapshot.val() || {}
-        arr = Object.values(tasks)
-        if (arr.length === Object.keys(tasks).length) {
-          resolve(arr)
-        }
-      })
-    })
-    friendPromise.then((friendArr) => {
-      if (friendArr.some((el, i) => el.name === data.name)) {
-        console.log('friend already exists')
-      } else {
-        const friendId = ref.child('friends').push().key
-        ref.child(`friends/${friendId}`).set(data)
-      }
-    })
-  }
-
   filterContacts = (text) => {
     console.log('do some filtering')
     this.setState({text: text})
   }
 
-  handleAddContact = (name, phone) => {
-    //console.log('clicked', name, phone)
-    let contactData = {
-      name: name,
-      phone: phone
-    }
-    this.setState({friends: [...this.state.friends, contactData]})
-    this.createContacts(contactData)
-  }
-
   componentDidMount() {
     this.getContacts()
+  }
+
+  handleScroll(event) {
+    this.setState({ scrollY: event.nativeEvent.contentOffset.y });
   }
 
   render() {
@@ -104,22 +75,24 @@ export default class Contact extends Component {
             onChangeText={this.filterContacts}
             value={this.state.text}
           /> */}
-          <Card containerStyle={{flex: 1}} title="Add To Sleep Over">
-            <ScrollView>
-              { this.state.contacts ?
-                  this.state.contacts.map((u, i) => {
-                    console.log(u.name)
-                    return (
-                      <ListItem
-                        key={i}
-                        roundAvatar
-                        title={u.name}
-                        avatar={{uri:'./assets/avatars/boy.png'}}
-                        onPress={() => this.handleAddContact(u.name, u.phoneNumbers[0].digits)}
-                      />
-                    );
-                  })
-               : null}
+          <Card containerStyle={{flex: 1}}
+                title="Add To Sleep Over">
+            <ScrollView
+              ref="ScrollView"
+              onScroll={event => this.handleScroll(event)}>
+                { this.state.contacts ?
+                    this.state.contacts.map((u, i) => {
+                      console.log(u.name)
+                      return (
+                        <ListItem
+                          key={i}
+                          roundAvatar
+                          title={u.name}
+                          avatar={{uri:'/assets/avatars/boy.png'}}
+                        />
+                      );
+                    })
+                  : null}
             </ScrollView>
           </Card>
       </View>
@@ -134,5 +107,10 @@ const styles = StyleSheet.create({
     margin: '5%',
     backgroundColor: '#fff',
     borderRadius: 10,
-  }
+  },
+  innerView:{
+    flexDirection:'row',
+    flexWrap: 'wrap',
+    flex: 1
+},
 })

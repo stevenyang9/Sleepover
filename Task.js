@@ -67,6 +67,7 @@ export default class Task extends Component {
 
   handlePicker = (data) => {
     this.setState({contact: data})
+    this.onValueChange.bind(this, data)
   }
 
   componentWillMount() {
@@ -102,15 +103,13 @@ export default class Task extends Component {
           <Picker
             style={{marginTop: 0}}
             selectedValue={this.state.contact.name}
-            onValueChange={(e) => this.handlePicker(e) }>
+            onValueChange={(e) => this.handlePicker(e)}>
             {this.data ? this.data.map((friend,i) => {
                 return (
                   <Picker.Item key={i} label={friend.name} value={friend} />
                 )
               }) : null }
           </Picker>
-
-
 
           <View style={{alignItems: 'center'}}>
             <LinearGradient colors={['#0cc5c7', '#0097d1', '#0058d1']} style={{ width: 250, padding: 10, alignItems: 'center', borderRadius: 40 }}>
@@ -128,7 +127,7 @@ export default class Task extends Component {
 const styles = StyleSheet.create({
   container: {
     //flex: 1,
-    marginTop: '20%',
+    marginTop: '10%',
     margin: '5%',
     backgroundColor: '#fff',
     borderRadius: 10,
