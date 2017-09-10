@@ -46,9 +46,7 @@ export default class Home extends Component {
   }
 
   componentWillMount(){
-    this.listen()
-    //contact, date, repeat, title
-
+    this.listen() // fetch data from firebase
   }
 
   setNativeProps = (nativeProps) => {
