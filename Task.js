@@ -7,6 +7,7 @@ import {  DatePickerIOS,
           View, } from 'react-native'
 import { CheckBox, Button } from 'react-native-elements'
 import { ref } from './config.js'
+import { LinearGradient } from 'expo'
 
 export default class Task extends Component {
   constructor(props){
@@ -60,7 +61,7 @@ export default class Task extends Component {
 
         { ['S','M','T','W','T','F','S'].map((day, i) => {
           return (  <Image key={i} style={this.state.repeat[i] ? styles.circleChecked : styles.circle} >
-                      <Text style={{color: 'white'}} onPress={(e) => {this.handleClick(i, e)}}>{day}</Text>
+                      <Text style={this.state.repeat[i] ? styles.textChecked : styles.textNotCheck} onPress={(e) => {this.handleClick(i, e)}}>{day}</Text>
                     </Image>)
         }) }
         </View>
@@ -71,12 +72,14 @@ export default class Task extends Component {
             onChangeText={(text) => this.setState({contact: text})}
             value={this.state.contact}
           />
-        <Button
-          large
-          buttonStyle={{backgroundColor: 'blue'}}
-          icon={{name: 'calendar-plus-o', type: 'font-awesome'}}
-          onPress={this.createTask}
-          title='CREATE' />
+          <View style={{alignItems: 'center'}}>
+            <LinearGradient colors={['#0cc5c7', '#0097d1', '#0058d1']} style={{ width: 250, padding: 10, alignItems: 'center', borderRadius: 40 }}>
+                <Button buttonStyle={{backgroundColor:'transparent'}}
+                icon={{name: 'calendar-plus-o', type: 'font-awesome'}}
+                onPress={this.createTask}
+                title='CREATE' />
+            </LinearGradient>
+          </View>
       </View>
     );
   }
@@ -88,9 +91,9 @@ const styles = StyleSheet.create({
     marginTop: '20%',
     margin: '5%',
     backgroundColor: '#fff',
+    borderRadius: 10,
     // alignItems: 'center',
-    // justifyContent: 'center',
-  },
+    },
   datepicker: {
     backgroundColor: 'black',
     flex: 1,
@@ -99,21 +102,23 @@ const styles = StyleSheet.create({
     //width: '500px'
   },
   circle: {
-    width: 40,
+    width: 35,
     height: 40,
     borderRadius: 20,
     margin: '1%',
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#0097d1',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
  },
  circleChecked: {
-   width: 40,
+   width: 35,
    height: 40,
    borderRadius: 20,
    margin: '1%',
-   backgroundColor: 'red',
+   backgroundColor: '#0058d1',
    flex: 1,
    justifyContent: 'center',
    alignItems: 'center',

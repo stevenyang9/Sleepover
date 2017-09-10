@@ -50,6 +50,19 @@ export default class Home extends Component {
 
   }
 
+  setNativeProps = (nativeProps) => {
+    this._root.setNativeProps(nativeProps);
+  }
+
+  onPress() {
+    console.log('asdf')
+    this.props.navigator.push({
+      component:Task,
+      title: 'Genius',
+      passProps: { myProp: 'genius' },
+    });
+  }
+
   render() {
     //'rgb(45,156,219)'
     return (

@@ -3,8 +3,8 @@ import {  NavigatorIOS,
           StyleSheet,
           Text,
           TextInput,
-          TouchableHighlight,
-          View, } from 'react-native'
+          Image,
+          View } from 'react-native'
 import Task from './Task'
 import Home from './Home'
 
