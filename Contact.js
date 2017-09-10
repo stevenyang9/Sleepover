@@ -37,7 +37,7 @@ export default class Contact extends Component {
           Expo.Contacts.PHONE_NUMBERS,
           Expo.Contacts.EMAILS,
         ],
-        pageSize: 10,
+        pageSize: 1000,
         pageOffset: 0,
       });
       if (contacts.total > 0) {
