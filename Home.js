@@ -8,6 +8,7 @@ import {
   } from 'react-native'
 import { ref } from './config.js'
 import Timeline from 'react-native-timeline-listview'
+<<<<<<< HEAD
 import { Permissions, Notifications } from 'expo';
 import CheckIn from './CheckIn'
 
@@ -37,6 +38,10 @@ async function registerForPushNotificationsAsync() {
   const tokenId = ref.child('tokens').push().key
   return ref.child(`tokens/${tokenId}`).set({token: {value: token}})
 }
+=======
+import { LinearGradient } from 'expo'
+import Icon from 'react-native-vector-icons';
+>>>>>>> a7206ed97a6be8c13341738e93bc3223603e7c4a
 
 
 export default class Home extends Component {
@@ -117,8 +122,9 @@ export default class Home extends Component {
             <Text>
             {this.state.data ?
             <Timeline
+              separator={0}
               style={styles.list}
-              circleSize={20}
+              circleSize={10}
               circleColor='rgb(45,156,219)'
               lineColor='rgb(45,156,219)'
               timeContainerStyle={{minWidth:52, marginTop: -5}}
@@ -143,12 +149,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-		paddingTop:65,
-    marginTop: '10%',
+    paddingTop: 83,
   },
   list: {
     flex: 1,
-    marginTop:20,
+    marginBottom:10,
     width: 1000,
     height: 800
   },

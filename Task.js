@@ -67,6 +67,7 @@ export default class Task extends Component {
 
   handlePicker = (data) => {
     this.setState({contact: data})
+    this.onValueChange.bind(this, data)
   }
 
   componentWillMount() {
@@ -77,7 +78,7 @@ export default class Task extends Component {
     return (
       <View style={styles.container}>
         <TextInput
-            style={{height: 40, margin: "5% 0%", textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
+            style={{height: 40, margin: "10% 0%", textAlign: 'center', borderBottomColor: '#000000', borderBottomWidth: 1,}}
             placeholder={'Please enter Task Title'}
             placeholderTextColor={'gray'}
             onChangeText={(text) => this.setState({title: text})}
@@ -87,17 +88,19 @@ export default class Task extends Component {
                         style={styles.datepicker}
                         mode="datetime"
                         onDateChange= {this.dateChange}/>
-        <CheckBox title='Repeat' checked={this.state.checked} style={{marginTop: '30%', padding: '5%'}}/>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{marginTop: '25%', padding: '5%'}}>Pick days to repeat this alarm.</Text>
+        </View>
         <View style={styles.repeat}>
 
-        { ['S','M','T','W','T','F','S'].map((day, i) => {
-          return (
-            <TouchableHighlight key={i} onPress={(e) => {this.handleClick(i, e)}}
-              style={this.state.repeat[i] ? styles.circleChecked : styles.circle}>
-                <Text style={this.state.repeat[i] ? styles.textChecked : styles.textNotCheck} >{day}</Text>
-            </TouchableHighlight>
-            )
-        }) }
+          { ['S','M','T','W','T','F','S'].map((day, i) => {
+            return (
+              <TouchableHighlight key={i} onPress={(e) => {this.handleClick(i, e)}}
+                style={this.state.repeat[i] ? styles.circleChecked : styles.circle}>
+                  <Text style={this.state.repeat[i] ? styles.textChecked : styles.textNotCheck} >{day}</Text>
+              </TouchableHighlight>
+              )
+          }) }
         </View>
           <Picker
             style={{marginTop: 0}}
@@ -109,8 +112,6 @@ export default class Task extends Component {
                 )
               }) : null }
           </Picker>
-
-
 
           <View style={{alignItems: 'center'}}>
             <LinearGradient colors={['#0cc5c7', '#0097d1', '#0058d1']} style={{ width: 250, padding: 10, alignItems: 'center', borderRadius: 40 }}>
@@ -128,7 +129,7 @@ export default class Task extends Component {
 const styles = StyleSheet.create({
   container: {
     //flex: 1,
-    marginTop: '20%',
+    marginTop: '10%',
     margin: '5%',
     backgroundColor: '#fff',
     borderRadius: 10,
