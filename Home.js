@@ -11,29 +11,43 @@ import Timeline from 'react-native-timeline-listview'
 export default class Home extends Component {
   constructor(props, context){
     super(props, context)
-    this.data = [
-      {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
-      {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
-      {time: '12:00', title: 'Event 3', description: 'Event 3 Description'},
-      {time: '14:00', title: 'Event 4', description: 'Event 4 Description'},
-      {time: '16:30', title: 'Event 5', description: 'Event 5 Description'}
-    ]
+    this.state = {
+      data: []
+    }
   }
 
-  readData = () => {
-    return ref.child('tasks').on('value', (snapshot) => {
-      console.log('fetching tasks')
-      const tasks = snapshot.val() || {}
+  listen = () => {
+    let arr = []
+    let taskPromise = new Promise((resolve, reject) => {
+      ref.child('tasks').once('value', (snapshot) => {
+        console.log('fetching tasks')
+        const tasks = snapshot.val() || {}
+        arr = Object.values(tasks)
+        if (arr.length === Object.keys(tasks).length) {
+          resolve(arr)
+        }
+      })
+    })
+    taskPromise.then((tasks) => {
+      console.log('resolving promise')
       console.log(tasks)
-      return tasks
-    }, (error) => {
-      console.log("The read failed: " + error.code);
-      return error.code
+      let formatData = tasks.map((item, i) => {
+        // time description title
+        return {
+          title: item.title,
+          description: `${item.date.split(':')[0].slice(0, item.date.length-3)} Contact: ${item.contact}`,
+          time: `${item.date.split(':')[0].slice(-2)}:${item.date.split(':')[1]}`
+        }
+      }, [])
+      console.log('set state')
+      this.setState({data: formatData})
     })
   }
 
   componentWillMount(){
-    let data = this.readData()
+    this.listen()
+    //contact, date, repeat, title
+
   }
 
   render() {
@@ -41,6 +55,7 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
         <Text>
+        {this.state.data ?
         <Timeline
           style={styles.list}
           circleSize={20}
@@ -50,10 +65,12 @@ export default class Home extends Component {
           timeStyle={{textAlign: 'center', backgroundColor:'#ff9797', color:'white', padding:5, borderRadius:13}}
           descriptionStyle={{color:'gray'}}
           options={{
-            style:{paddingTop:5}
+            style:{paddingTop:5},
+            enableEmptySections: true
           }}
-          data={this.data}
-        />
+          data={this.state.data}
+        /> : <Text>No events upcoming! :)</Text>
+        }
         </Text>
 
       </View>
