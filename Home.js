@@ -67,7 +67,7 @@ export default class Home extends Component {
         // time description title
         return {
           title: item.title,
-          description: `${item.date.split(':')[0].slice(0, item.date.length-3)} Contact: ${item.contact.name}`,
+          description: `${item.date.split(':')[0].slice(0, item.date.split(':')[0].length-3)}\nContact: ${item.contact}`,
           time: `${item.date.split(':')[0].slice(-2)}:${item.date.split(':')[1]}`
         }
       }, [])
