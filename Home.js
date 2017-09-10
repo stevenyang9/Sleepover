@@ -7,6 +7,7 @@ import {
   } from 'react-native'
 import { ref } from './config.js'
 import Timeline from 'react-native-timeline-listview'
+import { LinearGradient } from 'expo'
 
 export default class Home extends Component {
   constructor(props, context){
@@ -69,11 +70,11 @@ export default class Home extends Component {
       <View style={styles.container}>
         <Text>
         {this.state.data ?
+          <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
         <Timeline
           style={styles.list}
           circleSize={20}
           circleColor='rgb(45,156,219)'
-          lineColor='rgb(45,156,219)'
           timeContainerStyle={{minWidth:52, marginTop: -5}}
           timeStyle={{textAlign: 'center', backgroundColor:'#ff9797', color:'white', padding:5, borderRadius:13}}
           descriptionStyle={{color:'gray'}}
@@ -82,7 +83,7 @@ export default class Home extends Component {
             enableEmptySections: true
           }}
           data={this.state.data}
-        /> : <Text>No events upcoming! :)</Text>
+        /> </LinearGradient>: <Text>No events upcoming! :)</Text>
         }
         </Text>
 
@@ -95,12 +96,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-		paddingTop:65,
-    marginTop: '10%',
+    paddingTop: 83,
   },
   list: {
     flex: 1,
-    marginTop:20,
+    marginBottom:10,
     width: 1000,
     height: 800
   },
