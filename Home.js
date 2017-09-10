@@ -9,6 +9,8 @@ import {
 import { ref } from './config.js'
 import Timeline from 'react-native-timeline-listview'
 import { Permissions, Notifications } from 'expo';
+import CheckIn from './CheckIn'
+
 
 async function registerForPushNotificationsAsync() {
   const { existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -41,7 +43,8 @@ export default class Home extends Component {
   constructor(props, context){
     super(props, context)
     this.state = {
-      data: []
+      data: [],
+      notifications: {}
     }
   }
 
@@ -75,8 +78,18 @@ export default class Home extends Component {
 
   componentWillMount(){
     this.listen() // fetch data from firebase
-    registerForPushNotificationsAsync()
+    registerForPushNotificationsAsync();
+
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    console.log(this._notificationSubscription);
   }
+
+  _handleNotification = (notification) => {
+    console.log(';enetered via notification')
+   this.setState({notification: notification});
+  };
+
+
 
   setNativeProps = (nativeProps) => {
     this._root.setNativeProps(nativeProps);
@@ -91,28 +104,36 @@ export default class Home extends Component {
     });
   }
 
+
+
   render() {
     //'rgb(45,156,219)'
+    console.log(this.state.notifications)
+    console.log('mobile')
     return (
       <View style={styles.container}>
-        <Text>
-        {this.state.data ?
-        <Timeline
-          style={styles.list}
-          circleSize={20}
-          circleColor='rgb(45,156,219)'
-          lineColor='rgb(45,156,219)'
-          timeContainerStyle={{minWidth:52, marginTop: -5}}
-          timeStyle={{textAlign: 'center', backgroundColor:'#ff9797', color:'white', padding:5, borderRadius:13}}
-          descriptionStyle={{color:'gray'}}
-          options={{
-            style:{paddingTop:5},
-            enableEmptySections: true
-          }}
-          data={this.state.data}
-        /> : <Text>No events upcoming! :)</Text>
-        }
-        </Text>
+      { this.state.notifications ?
+            <CheckIn /> :
+            <Text>
+            {this.state.data ?
+            <Timeline
+              style={styles.list}
+              circleSize={20}
+              circleColor='rgb(45,156,219)'
+              lineColor='rgb(45,156,219)'
+              timeContainerStyle={{minWidth:52, marginTop: -5}}
+              timeStyle={{textAlign: 'center', backgroundColor:'#ff9797', color:'white', padding:5, borderRadius:13}}
+              descriptionStyle={{color:'gray'}}
+              options={{
+                style:{paddingTop:5},
+                enableEmptySections: true
+              }}
+              data={this.state.data}
+            /> : <Text>No events upcoming! :)</Text>
+            }
+            </Text>
+      }
+
       </View>
     );
   }
