@@ -17,7 +17,8 @@ export default class Contact extends Component {
     super(props)
     this.state = {
       text: '',
-      contacts: []
+      contacts: [],
+      friends: []
     }
   }
 
@@ -55,8 +56,14 @@ export default class Contact extends Component {
     this.setState({text: text})
   }
 
-  handleAddContact = (contact) => {
-    console.log('clicked', contact)
+  handleAddContact = (name, phone) => {
+    //console.log('clicked', name, phone)
+    let contactData = {
+      name: name,
+      phone: phone
+    }
+    this.setState({friends: [...this.state.friends, contactData]})
+    console.log(this.state.friends)
   }
 
   componentDidMount() {
@@ -85,8 +92,8 @@ export default class Contact extends Component {
                         key={i}
                         roundAvatar
                         title={u.name}
-                        avatar={{uri:'/assets/avatars/boy.png'}}
-                        onPress={(contact) => this.handleAddContact(contact)}
+                        avatar={{uri:'./assets/avatars/boy.png'}}
+                        onPress={() => this.handleAddContact(u.name, u.phoneNumbers[0].digits)}
                       />
                     );
                   })

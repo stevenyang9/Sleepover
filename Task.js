@@ -96,14 +96,12 @@ const styles = StyleSheet.create({
     margin: '5%',
     backgroundColor: '#fff',
     borderRadius: 10,
-    // alignItems: 'center',
     },
   datepicker: {
     backgroundColor: 'black',
     flex: 1,
     marginTop: '30%',
     justifyContent: 'center',
-    //width: '500px'
   },
   circle: {
     width: 35,
