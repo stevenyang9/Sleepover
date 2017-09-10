@@ -55,6 +55,10 @@ export default class Contact extends Component {
     this.setState({text: text})
   }
 
+  handleAddContact = (contact) => {
+    console.log('clicked', contact)
+  }
+
   componentDidMount() {
     this.getContacts()
   }
@@ -71,10 +75,8 @@ export default class Contact extends Component {
             onChangeText={this.filterContacts}
             value={this.state.text}
           /> */}
-          <Card containerStyle={{flex: 1}}
-                title="Add To Sleep Over">
+          <Card containerStyle={{flex: 1}} title="Add To Sleep Over">
             <ScrollView>
-
               { this.state.contacts ?
                   this.state.contacts.map((u, i) => {
                     console.log(u.name)
@@ -84,11 +86,11 @@ export default class Contact extends Component {
                         roundAvatar
                         title={u.name}
                         avatar={{uri:'/assets/avatars/boy.png'}}
+                        onPressRightIcon={(contact) => this.handleAddContact(contact)}
                       />
                     );
                   })
                : null}
-
             </ScrollView>
           </Card>
       </View>
