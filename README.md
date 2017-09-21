@@ -8,7 +8,7 @@ Sleepover is an iOS app that helps you set tasks for you and your close friends.
 * [Geng Sng](http://github.com/snggeng)
 * [Steven Yang](https://github.com/stevenyang9)
 * [Stephenie Ding](https://github.com/sd268)
-* Matthew Keep
+* [Matthew Keep](https://github.com/mkeep)
 
 # Stack
 * [React Native](https://facebook.github.io/react-native/)
